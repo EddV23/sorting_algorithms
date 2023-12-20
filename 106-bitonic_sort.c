@@ -12,14 +12,10 @@ void swap(int *a, int *b);
  */
 void bitonic_merge(int *array, size_t size, size_t low, size_t count, char dir)
 {
-	size_t step, i, j;
-
-	(void)size;
+	size_t i, j, step = count / 2;
 
 	if (count > 1)
 	{
-		step = count / 2;
-
 		for (i = low; i < low + step; i++)
 		{
 			j = i + step;
@@ -30,6 +26,8 @@ void bitonic_merge(int *array, size_t size, size_t low, size_t count, char dir)
 				swap(array + i, array + j);
 			}
 		}
+		bitonic_merge(array, size, low, step, dir);
+		bitonic_merge(array, size, low + step, step, dir);
 	}
 }
 
@@ -55,10 +53,10 @@ void bitonic_sort_recursive(int *array, size_t size, size_t low,
 		print_array(array + low, count);
 
 		/* Ascending order */
-		bitonic_sort_recursive(array, step, low, step, 1);
+		bitonic_sort_recursive(array, step, low, step, 0);
 
 		/* Descending order */
-		bitonic_sort_recursive(array, step, low + step, step, 0);
+		bitonic_sort_recursive(array, step, low + step, step, 1);
 
 		bitonic_merge(array, size, low, count, dir);
 
