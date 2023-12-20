@@ -41,7 +41,7 @@ void radix_sort(int *array, size_t size)
 void counting_sort_radix(int *array, size_t size, int exp, int *buf)
 {
 	int *output;
-	int i, count[10] = {0};
+	int i, count[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	output = malloc(size * sizeof(int));
 
@@ -73,6 +73,7 @@ void counting_sort_radix(int *array, size_t size, int exp, int *buf)
 int get_max(int *array, size_t size)
 {
 	int max = array[0];
+	/*int i*/
 	size_t i;
 
 	for (i = 1; i < size; i++)
