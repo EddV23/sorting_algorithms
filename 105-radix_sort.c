@@ -1,7 +1,7 @@
 #include "sort.h"
 
 void counting_sort_radix(int *array, size_t size, int exp, int *buf);
-int get_max(int *array, size_t size);
+int get_max(int *array, int size);
 
 /**
  * radix_sort - Sorts an array of integers in ascending order using Radix sort
@@ -70,11 +70,10 @@ void counting_sort_radix(int *array, size_t size, int exp, int *buf)
  * @size: Number of elements in @array
  * Return: The maximum value in the array
  */
-int get_max(int *array, size_t size)
+int get_max(int *array, int size)
 {
 	int max = array[0];
-	/*int i*/
-	size_t i;
+	int i;
 
 	for (i = 1; i < size; i++)
 	{
