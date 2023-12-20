@@ -2,6 +2,7 @@
 
 void quick_sort_recursive(int *array, int low, int high, size_t size);
 int lomuto_partition(int *array, int low, int high, size_t size);
+void swap(int *a, int *b);
 
 /**
  * quick_sort - Sorts an array of integers in ascending order using Quick sort
@@ -45,30 +46,39 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
  */
 int lomuto_partition(int *array, int low, int high, size_t size)
 {
-	int *pivot, temp;
-	int i, j;
+        int a, b, *pivot = array + high;
 
-	pivot = array + high;
-	i = low - 1;
-
-	for (j = low; j <= high - 1; j++)
+	for (a = b = low; b < high; b++)
 	{
-		if (array[j] < *pivot)
+		if (array[b] < *pivot)
 		{
-			i++;
-			temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
-			if (i != j)
+			if (a < b)
+			{
+				swap(array + b, array + a);
 				print_array(array, size);
+			}
+			a++;
 		}
 	}
 
-	temp = array[i + 1];
-	array[i + 1] = array[high];
-	array[high] = temp;
-	if (i + 1 != high)
+	if (array[a] > *pivot)
+	{
+		swap(array + a, pivot);
 		print_array(array, size);
+	}
 
-	return (i + 1);
+	return (a);
+}
+
+/**
+ * swap - Swaps two integers
+ * @a: The first integer
+ * @b: The second integer
+ */
+void swap(int *a, int *b)
+{
+	int temp = *a;
+
+	*a = *b;
+	*b = temp;
 }
